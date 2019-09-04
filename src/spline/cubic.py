@@ -8,6 +8,7 @@ class CubicPolynomial:
         self._a0 = a0
         self._a1 = a1
         self._a2 = a2
+        self._a3 = a3
 
     def get_function(self):
         return poly1d([self._a0, self._a1, self._a2, self._a3])
