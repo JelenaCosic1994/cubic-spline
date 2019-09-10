@@ -4,7 +4,7 @@ import copy
 
 from src.spline.spline import Spline
 
-STEP = 0.5
+STEP = 0.01
 
 
 def plot_spline(spline):
