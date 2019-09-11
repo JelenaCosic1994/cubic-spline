@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 class BaseSplineCreator(ABC):
 
     @abstractmethod
-    def get_a_and_b(self, **kwargs):
+    def get_m(self, **kwargs):
         pass
 
     def cubic_spline(self, t, fp):
@@ -35,19 +35,14 @@ class BaseSplineCreator(ABC):
         ni = ni[1:]
         lambd = lambd[1:]
 
-        A, B = self.get_a_and_b(n=n, h=h, fp=fp, f=f, ni=ni, mi=mi, lambd=lambd)
-
-        # momenti
-        M = np.linalg.solve(A, B)
-
-        print("M = ", M)
+        M = self.get_m(n=n, h=h, fp=fp, f=f, ni=ni, mi=mi, lambd=lambd)
 
         # sad trazimo splajn na pojedinacnim intervalima; prvo racunamo a, b, c, i d
         alpha = []
         beta = []
         gamma = []
         delta = []
-        for i in range(0, n):
+        for i in range(0, n):  # od 0 do n-1 (ima n elemenata)
             alpha.append(f[i])
             beta.append((f[i + 1] - f[i]) / h[i+1] - h[i+1] / 6 * (2 * M[i] + M[i + 1]))
             gamma.append(1 / 2 * M[i])

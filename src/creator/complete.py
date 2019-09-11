@@ -4,7 +4,7 @@ from src.creator.base import BaseSplineCreator
 
 class CompleteSplineCreator(BaseSplineCreator):
 
-    def get_a_and_b(self, **kwargs):
+    def get_m(self, **kwargs):
         n = kwargs['n']
         h = kwargs['h']
         fp = kwargs['fp']
@@ -32,4 +32,9 @@ class CompleteSplineCreator(BaseSplineCreator):
         print("A=", A)
         print("B=", B)
 
-        return A, B
+        # momenti
+        M = np.linalg.solve(A, B)
+
+        print("M = ", M)
+
+        return M
