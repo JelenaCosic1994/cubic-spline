@@ -6,9 +6,6 @@ class SecondSplineCreator(BaseSplineCreator):
 
     def get_m(self, **kwargs):
         n = kwargs['n']
-        h = kwargs['h']
-        fp = kwargs['fp']
-        f = kwargs['f']
         ni = kwargs['ni']
         mi = kwargs['mi']
         lambd = kwargs['lambd']
