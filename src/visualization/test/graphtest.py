@@ -1,6 +1,6 @@
 from src.spline.spline import Spline
 from src.visualization.graph import plot_spline
-from src.creator.creator import cubic_spline_complete
+from src.creator.complete import cubic_spline_complete
 import numpy as np
 
 s = Spline()

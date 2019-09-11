@@ -7,7 +7,7 @@ from abc import ABC, abstractmethod
 class BaseSplineCreator(ABC):
 
     @abstractmethod
-    def get_a_and_b(self):
+    def get_a_and_b(self, **kwargs):
         pass
 
     def cubic_spline(self, t, fp):
@@ -35,7 +35,7 @@ class BaseSplineCreator(ABC):
         ni = ni[1:]
         lambd = lambd[1:]
 
-        A, B = self.get_a_and_b()
+        A, B = self.get_a_and_b(n=n, h=h, fp=fp, f=f, ni=ni, mi=mi, lambd=lambd)
 
         # momenti
         M = np.linalg.solve(A, B)
