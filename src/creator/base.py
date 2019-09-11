@@ -10,7 +10,7 @@ class BaseSplineCreator(ABC):
     def get_m(self, **kwargs):
         pass
 
-    def cubic_spline(self, t, fp):
+    def cubic_spline(self, t, **kwargs):
 
         x = t[0, :]  # (ima duzinu n + 1) x0, x1, x2,.. xn
         f = t[1, :]  # (ima duzinu n + 1) x0, x1, x2,.. xn
@@ -35,7 +35,7 @@ class BaseSplineCreator(ABC):
         ni = ni[1:]
         lambd = lambd[1:]
 
-        M = self.get_m(n=n, h=h, fp=fp, f=f, ni=ni, mi=mi, lambd=lambd)
+        M = self.get_m(n=n, h=h, f=f, ni=ni, mi=mi, lambd=lambd, **kwargs)
 
         print("M: ", M)
 
