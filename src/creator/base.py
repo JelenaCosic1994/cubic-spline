@@ -37,6 +37,8 @@ class BaseSplineCreator(ABC):
 
         M = self.get_m(n=n, h=h, fp=fp, f=f, ni=ni, mi=mi, lambd=lambd)
 
+        print("M: ", M)
+
         # sad trazimo splajn na pojedinacnim intervalima; prvo racunamo a, b, c, i d
         alpha = []
         beta = []
@@ -70,7 +72,7 @@ class BaseSplineCreator(ABC):
         for i in range(0, n):
             x1 = x[i]
             x2 = x[i+1]
-            spline_coefs = S[i]
+            spline_coefs = S[i][-4:]
 
             spline.add_cubic_polynomial_for_range(spline_coefs, x1, x2)
 
