@@ -14,4 +14,13 @@ def plot_spline(spline):
         array_for_plotting.append(copy.deepcopy(x))
         array_for_plotting.append(function_on_interval(array_for_plotting[-1]))
     plt.plot(*array_for_plotting)
+
+
+def plot_points(table):
+    plt.plot(table[0], table[1], 'o')
+
+
+def show_plot():
     plt.show()
+
+
