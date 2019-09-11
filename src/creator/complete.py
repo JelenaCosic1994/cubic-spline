@@ -2,7 +2,7 @@ import numpy as np
 from src.creator.base import BaseSplineCreator
 
 
-class SplineCreator(BaseSplineCreator):
+class CompleteSplineCreator(BaseSplineCreator):
 
     def get_a_and_b(self, **kwargs):
         n = kwargs['n']
