@@ -4,7 +4,7 @@ from src.creator.base import BaseSplineCreator
 
 class PeriodicSplineCreator(BaseSplineCreator):
 
-    def get_a_and_b(self, **kwargs):
+    def get_m(self, **kwargs):
         n = kwargs['n']
         h = kwargs['h']
         fp = kwargs['fp']
@@ -19,7 +19,7 @@ class PeriodicSplineCreator(BaseSplineCreator):
         A[0] = np.hstack((np.array((2, ni[0])), np.zeros((n - 3)), np.array((mi[0]))))
 
         for i in range(1, n-1):  # od 1 do n-2 (ima ih n - 2)
-            A[i] = np.hstack((np.zeros((i - 1)), np.array((mi[i], 2, ni[i])), np.zeros((n - i - 1))))
+            A[i] = np.hstack((np.zeros((i - 1)), np.array((mi[i], 2, ni[i])), np.zeros((n - i - 2))))
 
         ni_n = h[1]/(h[-1] + h[1])
         mi_n = 1 - ni_n
@@ -35,4 +35,9 @@ class PeriodicSplineCreator(BaseSplineCreator):
         print("A=", A)
         print("B=", B)
 
-        return A, B
+        M = np.linalg.solve(A, B)
+        ret_value = []
+        ret_value.append(M[-1])
+        for x in M:
+            ret_value.append(x)
+        return ret_value
