@@ -12,6 +12,9 @@ class BaseSplineCreator(ABC):
 
     @staticmethod
     def calculate_raw_spline(alpha, beta, gamma, delta, x, n):
+        """
+        Calculate spline
+        """
         raw_spline = []
         for i in range(0, n):
             s1 = np.hstack((np.zeros(n+1), np.array(alpha[i])))
@@ -35,11 +38,19 @@ class BaseSplineCreator(ABC):
 
     @staticmethod
     def calculate_coefficients(h, f, M, n):
+        """
+        Calculate coefficients alpha, beta, gamma and delta
+        :param h: distances between points
+        :param f: function values
+        :param M: moments
+        :param n: length
+        :return: coefficients alpha, beta, gamma and delta
+        """
         alpha = []
         beta = []
         gamma = []
         delta = []
-        for i in range(0, n):  # od 0 do n-1 (ima n elemenata)
+        for i in range(0, n):  # from 0 to n-1 (n elements)
             alpha.append(f[i])
             beta.append((f[i + 1] - f[i]) / h[i+1] - h[i+1] / 6 * (2 * M[i] + M[i + 1]))
             gamma.append(1 / 2 * M[i])
@@ -49,9 +60,16 @@ class BaseSplineCreator(ABC):
 
     @staticmethod
     def calculate_ni_mi_lambda(f, h, n):
-        ni = [None] * n  # (ima duzinu n) nulti element dodat zbog lakseg indeksiranja
-        mi = [None] * n  # (ima duzinu n) nulti element dodat zbog lakseg indeksiranja
-        lambd = [None] * n  # (ima duzinu n) nulti element dodat zbog lakseg indeksiranja
+        """
+        Calculate coefficients mi, ni and lambda
+        :param f: function values
+        :param h: distances between points
+        :param n: length
+        :return: coefficients mi, ni and lambda
+        """
+        ni = [None] * n  # (length = n) zero element added for easier indexing
+        mi = [None] * n  # (length = n) zero element added for easier indexing
+        lambd = [None] * n  # (length = n) zero element added for easier indexing
 
         for i in range(1, n):  # 1, 2,.. n-1
             ni[i] = h[i+1] / (h[i] + h[i+1])
@@ -66,12 +84,12 @@ class BaseSplineCreator(ABC):
 
     def cubic_spline(self, t, **kwargs):
 
-        x = t[0, :]  # (ima duzinu n + 1) x0, x1, x2,.. xn
-        f = t[1, :]  # (ima duzinu n + 1) x0, x1, x2,.. xn
-        h = [None] + list(np.diff(x))  # rastojanja izmedju cvorova (ima duzinu n + 1), nulti element se ne koristi,
-        #  dodat zbog lakseg indeksiranja
+        x = t[0, :]  # (length = n + 1) x0, x1, x2,.. xn
+        f = t[1, :]  # (length = n + 1) x0, x1, x2,.. xn
+        h = [None] + list(np.diff(x))  # distances between points (length = n + 1), zero element is not in use,
+        # zero element added for easier indexing
 
-        n = len(x) - 1  # x0, x1,.. xn (n je n iz indeksa xn)
+        n = len(x) - 1  # x0, x1,.. xn (n is n from index of x_n)
 
         ni, mi, lambd = BaseSplineCreator.calculate_ni_mi_lambda(f, h, n)
 

@@ -6,6 +6,11 @@ STEP = 0.01
 
 
 def plot_spline(spline):
+    """
+    This method draw the spline
+    :param spline: spline
+    :return: spline graph
+    """
     array_for_plotting = []
     for interval_and_function in spline.get_ranges_and_functions():
         interval = interval_and_function['range']
@@ -17,6 +22,11 @@ def plot_spline(spline):
 
 
 def plot_points(table):
+    """
+    This method draws the points
+    :param table: contains x and f(x) values
+    :return: graph with points
+    """
     plt.plot(table[0], table[1], 'o')
 
 

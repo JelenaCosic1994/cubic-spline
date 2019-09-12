@@ -7,6 +7,7 @@ import numpy as np
 
 
 def main():
+    # application of complete cubic spline
     spline_creator = CompleteSplineCreator()
     t = np.array([[0, 1, 2], [1, 2, 3]])
     fp = np.array([[0, 2], [0, -1]])
@@ -14,6 +15,7 @@ def main():
     graph.plot_points(t)
     graph.show_plot()
 
+    # application of periodic cubic spline
     spline_creator = PeriodicSplineCreator()
     t = np.array([[0, 1, 2, 3, 4], [1, 5, 1, 5, 1]])
     graph.plot_spline(spline_creator.cubic_spline(t))
@@ -21,18 +23,21 @@ def main():
     graph.show_plot()
 
     # examples used for pdf:
+    # second cubic spline through 5 points
     spline_creator = SecondSplineCreator()
     t = np.array([[-3.7, -2.6, -0.6, 2.7, 3.9], [0.4, 2.8, 4.8, 3.8, 0]])
     graph.plot_spline(spline_creator.cubic_spline(t))
     graph.plot_points(t)
     graph.show_plot()
 
+    # second cubic spline through 6 points
     spline_creator = SecondSplineCreator()
     t = np.array([[-3.7, -2, -0.6, 2.7, 3.6, 3.9], [0.4, 3.9, 4.3, 3.8, 1.2, 0]])
     graph.plot_spline(spline_creator.cubic_spline(t))
     graph.plot_points(t)
     graph.show_plot()
 
+    # second cubic spline through 10 points
     spline_creator = SecondSplineCreator()
     t = np.array([[-3.7, -2, -1.2, -0.6, 0.7, 1.8, 2.7, 3.4, 3.6, 3.9], [0.4, 3.9, 3.9, 4.8, 4.8, 4.3, 3.8, 2.4, 1.2, 0]])
     graph.plot_spline(spline_creator.cubic_spline(t))
